@@ -61,6 +61,11 @@ install: ## install gems
 	@make up-d
 	@docker exec -it daikou-app-web-1 bundle install
 
+.PHONY: fmt
+fmt: ## check and fix code
+	@make up-d
+	@docker exec -it daikou-app-web-1 bundle exec rubocop -a
+
 .PHONY: bash
 bash: ## Use bash
 	@make up-d
