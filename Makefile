@@ -58,8 +58,7 @@ test: ## Running Rspec
 
 .PHONY: install
 install: ## install gems
-	@make up-d
-	@docker exec -it daikou-app-web-1 bundle install
+	@docker compose run web bundle install
 
 .PHONY: fmt
 fmt: ## check and fix code
