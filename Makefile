@@ -56,6 +56,11 @@ test: ## Running Rspec
 	@make up-d
 	@docker exec -it daikou-app-web-1 bundle exec rspec
 
+.PHONY: install
+install: ## install gems
+	@make up-d
+	@docker exec -it daikou-app-web-1 bundle install
+
 .PHONY: bash
 bash: ## Use bash
 	@make up-d
