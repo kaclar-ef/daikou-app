@@ -1,24 +1,35 @@
-# README
+# daikou-app
+代行車を依頼することができるwebアプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 環境
+- Ruby 3.0.3
+- Rails 6.1.5
 
-Things you may want to cover:
+# 開発環境の初期設定
+## 前提条件
+- dockerが使用できる状態にあること
 
-* Ruby version
+## 1.リポジトリのクローン
+ご自身のPCの任意のディレクトリに、このリポジトリをクローンしてください。
 
-* System dependencies
+## 2.master.keyの作成
+configディレクトリにmaster.keyファイルを作成してください。既にファイルが存在している場合は、記載されている文字列を削除してください。
+その後、アプリ管理者に指定された文字列をmaster.keyファイルに記入してください。
 
-* Configuration
+## 3.サービスのビルド
+クローンしたアプリのディレクトリで、以下のコマンドを実行します。
+```
+make first-build
+```
 
-* Database creation
+## 4.コンテナの起動
+以下のコマンドを実行します。
+```
+make up
+または
+make up-d
+```
+その後、ブラウザでlocalhost:3520へアクセスしてください。
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# makeコマンド
+makeコマンドの一覧はMakefileを確認、または`make help`コマンドを実行してください。
