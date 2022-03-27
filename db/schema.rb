@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_142644) do
+ActiveRecord::Schema.define(version: 2022_03_27_170713) do
+
+  create_table "driving_requests", charset: "utf8mb4", force: :cascade do |t|
+    t.datetime "reservation_datetime", precision: 6, null: false
+    t.string "departure_place", null: false
+    t.string "destination", null: false
+    t.column "car_model", "enum('普通(AT)','普通(MT)','中型','大型')", null: false
+    t.column "status", "enum('代行依頼中','代行受領済','依頼完了済')", null: false
+    t.integer "receipt_number", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_datetime"], name: "index_driving_requests_on_reservation_datetime"
+    t.index ["user_id"], name: "index_driving_requests_on_user_id"
+  end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
