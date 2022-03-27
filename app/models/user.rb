@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   # パスワードを英数字混合必須、記号も入力可能に設定
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[!-~]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX
+  validates_format_of :password, with: PASSWORD_REGEX, on: :create
 
   # 全角の漢字or平仮名or片仮名を使用しているか検証
   with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
