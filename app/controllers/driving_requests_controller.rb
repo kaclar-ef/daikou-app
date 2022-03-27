@@ -1,0 +1,2 @@
+class DrivingRequestsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class DrivingRequest < ApplicationRecord
+end
