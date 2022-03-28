@@ -110,7 +110,7 @@ RSpec.describe DrivingRequest, type: :model do
             @driving_request.status = nil
             expect(@driving_request).not_to be_valid  
           end
-          it "「代行依頼中、代行受領済、代行完了済」以外の値では登録できない" do
+          it "「代行依頼中、代行受領済、依頼完了済」以外の値では登録できない" do
             @driving_request.status = '期限切れ'
             expect(@driving_request).not_to be_valid
           end
@@ -168,7 +168,7 @@ RSpec.describe DrivingRequest, type: :model do
         end
         context "異常系" do
           it "userが紐づいていなければ登録できない" do
-            @driving_request.user_id = nil
+            @driving_request.user = nil
             expect(@driving_request).not_to be_valid
           end
           it "紐づいているuserがデータベースに存在しない場合は登録できない" do
