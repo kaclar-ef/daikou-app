@@ -37,34 +37,53 @@ RSpec.describe User, type: :model do
       context '正常系' do
         it '英数字混合6文字以上であれば登録できる' do
           @user.password = 'hoge12'
+          @user.password_confirmation = 'hoge12'
           expect(@user).to be_valid
         end
         it '英数字に加えて記号が含まれていても登録できる' do
           @user.password = 'hoge1!'
+          @user.password_confirmation = 'hoge1!'
+          expect(@user).to be_valid
+        end
+        it 'ユーザー情報の更新時は値が空でも保存できる' do
+          @user.save
+          @user.password = nil
+          @user.password_confirmation = nil
           expect(@user).to be_valid
         end
       end
       context '異常系' do
         it '空では登録できない' do
           @user.password = ''
+          @user.password_confirmation = ''
           expect(@user).not_to be_valid
         end
         it '5文字以下では登録できない' do
           @user.password = 'hoge1'
+          @user.password_confirmation = 'hoge1'
           expect(@user).not_to be_valid
         end
         it '256文字以上では登録できない' do
           @user.password = 'a' * 255 + '1'
+          @user.password_confirmation = 'a' * 255 + '1'
           expect(@user).not_to be_valid
         end
         it '英字が含まれていない場合は登録できない' do
           @user.password = '123!!!'
+          @user.password_confirmation = '123!!!'
           expect(@user).not_to be_valid
         end
         it '数字が含まれていない場合は登録できない' do
           @user.password = 'abc!!!'
+          @user.password_confirmation = 'abc!!!'
           expect(@user).not_to be_valid
         end
+        it "passwordとpassword_confirmtionが不一致だと登録できない" do
+          @user.password = 'hoge12'
+          @user.password_confirmation = 'hoge21'
+          expect(@user).not_to be_valid
+        end
+        
       end
     end
     describe 'first_name' do
