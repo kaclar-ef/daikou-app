@@ -43,6 +43,9 @@
           <td><%= driving_request.departure_place %></td>
           <td><%= driving_request.destination %></td>
           <td><%= driving_request.car_model %></td>
+          <% if driving_request.status != '依頼完了済' %>
+            <td><%= link_to '依頼キャンセル', driving_request_path(driving_request.id), method: :delete %></td>
+          <% end %>
         </tr>
       </tbody>
     <% end %>

@@ -9,6 +9,12 @@ class DrivingRequestsController < ApplicationController
     @driving_request.save    
   end
 
+  def destroy
+    driving_request = DrivingRequest.find(params[:id])
+    driving_request.destroy
+    redirect_to user_path(current_user.id)
+  end
+
   private
   def driving_request_params
     params.require(:driving_request).permit(:reservation_datetime, :departure_place, :destination, :car_model)

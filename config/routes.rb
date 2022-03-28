@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   }
   root to: "home#index"
   resources :users, only: :show
-  resources :driving_requests, only: [:new, :create]
+  resources :driving_requests, only: [:new, :create, :destroy]
 end
