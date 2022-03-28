@@ -1,0 +1,28 @@
+<h2>新規代行依頼</h2>
+<%= form_with model: @driving_request, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  
+  <div class="field">
+    <%= f.label :reservation_datetime, '依頼予約日時' %><br />
+    <%= f.datetime_field :reservation_datetime, autofocus: true, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :departure_place, '出発地の住所' %><br />
+    <%= f.text_field :departure_place, placeholder: '高松市番町四丁目1番10号', required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :destination, '目的地の住所'%><br />
+    <%= f.text_field :destination, placeholder: '高松市番町四丁目1番10号', required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :car_model, '車種' %><br />
+    <%= f.select :car_model, ['普通(AT)', '普通(MT)', '中型', '大型'], { include_blank: '選択してください' }, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "依頼する" %>
+  </div>
+<% end %>
