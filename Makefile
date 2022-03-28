@@ -8,6 +8,7 @@ first-build: ## First Settings
 	@make rails-command ARG=db:create
 	@make rails-command ARG=db:migrate
 	@make rails-command ARG=db:seed
+	@make rails-command ARG=webpacker:install
 
 .PHONY: build
 build: ## Build Services
