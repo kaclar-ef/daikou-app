@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_170713) do
     t.string "destination", null: false
     t.column "car_model", "enum('普通(AT)','普通(MT)','中型','大型')", null: false
     t.column "status", "enum('代行依頼中','代行受領済','依頼完了済')", null: false
-    t.integer "receipt_number", null: false
+    t.string "receipt_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
