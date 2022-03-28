@@ -7,6 +7,7 @@ first-build: ## First Settings
 	@make build
 	@make rails-command ARG=db:create
 	@make rails-command ARG=db:migrate
+	@make rails-command ARG=db:seed
 
 .PHONY: build
 build: ## Build Services
