@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  has_many :driving_requests
+  
   validates :first_name, :last_name, :first_name_kana, :last_name_kana, :phone_number, presence: true
   validates :email, :password, :first_name, :last_name, :first_name_kana, :last_name_kana, length: { maximum: 255 }
 
