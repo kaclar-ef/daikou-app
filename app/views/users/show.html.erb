@@ -2,7 +2,7 @@
 <h3>個人情報</h3>
 <p>※代行依頼時にはこちらの個人情報が代行会社へ通知されます</p>
 <%= link_to '個人情報の変更', edit_user_registration_path(@user) %>
-<table>
+<table border='1'>
   <tbody>
     <tr>
       <td>お名前</td>
@@ -22,3 +22,30 @@
     </tr>
   </tbody>
 </table>
+
+<h3>過去の代行依頼一覧</h3>
+  <table border='1'>
+    <thead>
+      <tr>
+        <td>依頼予約日時</td>
+        <td>依頼状況</td>
+        <td>依頼確認番号</td>
+        <td>出発地</td>
+        <td>目的地</td>
+        <td>車種</td>
+      </tr>
+    <% @driving_requests.each do |driving_request| %>
+      <tbody>
+        <tr>
+          <td><%= driving_request.reservation_datetime.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+          <td><%= driving_request.status %></td>
+          <td><%= driving_request.receipt_id %></td>
+          <td><%= driving_request.departure_place %></td>
+          <td><%= driving_request.destination %></td>
+          <td><%= driving_request.car_model %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </thead>
+</table>
+<%= paginate @driving_requests %>
