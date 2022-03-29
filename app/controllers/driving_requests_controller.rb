@@ -6,7 +6,8 @@ class DrivingRequestsController < ApplicationController
   def create
     @driving_request = DrivingRequest.new(driving_request_params)
     render 'new' and return unless @driving_request.valid?
-    @driving_request.save    
+
+    @driving_request.save
   end
 
   def destroy
@@ -16,8 +17,9 @@ class DrivingRequestsController < ApplicationController
   end
 
   private
+
   def driving_request_params
     params.require(:driving_request).permit(:reservation_datetime, :departure_place, :destination, :car_model)
-      .merge(status: '代行依頼中', receipt_id: SecureRandom.alphanumeric(6), user_id: current_user.id)
+          .merge(status: '代行依頼中', receipt_id: SecureRandom.alphanumeric(6), user_id: current_user.id)
   end
 end

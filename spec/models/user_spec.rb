@@ -18,9 +18,9 @@ RSpec.describe User, type: :model do
           @user.email = ''
           expect(@user).not_to be_valid
         end
-        it "256文字以上では登録できない" do
-          @user.first_name = 'hoge@example.com' + 'a' * 240
-          expect(@user).not_to be_valid  
+        it '256文字以上では登録できない' do
+          @user.first_name = "hoge@example.com#{'a' * 240}"
+          expect(@user).not_to be_valid
         end
         it '正しいアドレス形式でない場合は登録できない' do
           @user.email = 'hogefuga'
@@ -64,8 +64,8 @@ RSpec.describe User, type: :model do
           expect(@user).not_to be_valid
         end
         it '256文字以上では登録できない' do
-          @user.password = 'a' * 255 + '1'
-          @user.password_confirmation = 'a' * 255 + '1'
+          @user.password = "#{'a' * 255}1"
+          @user.password_confirmation = "#{'a' * 255}1"
           expect(@user).not_to be_valid
         end
         it '英字が含まれていない場合は登録できない' do
@@ -78,151 +78,150 @@ RSpec.describe User, type: :model do
           @user.password_confirmation = 'abc!!!'
           expect(@user).not_to be_valid
         end
-        it "passwordとpassword_confirmtionが不一致だと登録できない" do
+        it 'passwordとpassword_confirmtionが不一致だと登録できない' do
           @user.password = 'hoge12'
           @user.password_confirmation = 'hoge21'
           expect(@user).not_to be_valid
         end
-        
       end
     end
     describe 'first_name' do
       context '正常系' do
-        it "漢字で登録ができる" do
+        it '漢字で登録ができる' do
           @user.first_name = '太郎'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
-        it "平仮名で登録ができる" do
+        it '平仮名で登録ができる' do
           @user.first_name = 'たろう'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
-        it "片仮名で登録ができる" do
+        it '片仮名で登録ができる' do
           @user.first_name = 'タロウ'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
       end
       context '異常系' do
-        it "空では登録できない" do
+        it '空では登録できない' do
           @user.first_name = ''
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "256文字以上では登録できない" do
+        it '256文字以上では登録できない' do
           @user.first_name = 'あ' * 256
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "漢字・平仮名・片仮名以外の文字が含まれると登録できない" do
+        it '漢字・平仮名・片仮名以外の文字が含まれると登録できない' do
           @user.first_name = 'taro'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
       end
     end
     describe 'last_name' do
       context '正常系' do
-        it "漢字で登録ができる" do
+        it '漢字で登録ができる' do
           @user.last_name = '田中'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
-        it "平仮名で登録ができる" do
+        it '平仮名で登録ができる' do
           @user.last_name = 'たなか'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
-        it "片仮名で登録ができる" do
+        it '片仮名で登録ができる' do
           @user.last_name = 'タナカ'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
       end
       context '異常系' do
-        it "空では登録できない" do
+        it '空では登録できない' do
           @user.last_name = ''
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "256文字以上では登録できない" do
+        it '256文字以上では登録できない' do
           @user.last_name = 'あ' * 256
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "漢字・平仮名・片仮名以外の文字が含まれると登録できない" do
+        it '漢字・平仮名・片仮名以外の文字が含まれると登録できない' do
           @user.last_name = 'tanaka'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
       end
     end
     describe 'first_name_kana' do
       context '正常系' do
-        it "片仮名で登録できる" do
+        it '片仮名で登録できる' do
           @user.first_name_kana = 'タロウ'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
       end
       context '異常系' do
-        it "空では登録できない" do
+        it '空では登録できない' do
           @user.first_name_kana = ''
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "256文字以上では登録できない" do
+        it '256文字以上では登録できない' do
           @user.first_name_kana = 'ア' * 256
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "片仮名以外では登録できない" do
+        it '片仮名以外では登録できない' do
           @user.first_name_kana = 'たろう'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
           @user.first_name_kana = '太郎'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
           @user.first_name_kana = 'taro'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
       end
     end
     describe 'last_name_kana' do
       context '正常系' do
-        it "片仮名で登録できる" do
+        it '片仮名で登録できる' do
           @user.last_name_kana = 'タナカ'
-          expect(@user).to be_valid  
+          expect(@user).to be_valid
         end
       end
       context '異常系' do
-        it "空では登録できない" do
+        it '空では登録できない' do
           @user.last_name_kana = ''
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "256文字以上では登録できない" do
+        it '256文字以上では登録できない' do
           @user.last_name_kana = 'ア' * 256
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
-        it "片仮名以外では登録できない" do
+        it '片仮名以外では登録できない' do
           @user.last_name_kana = 'たなか'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
           @user.last_name_kana = '田中'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
           @user.first_name_kana = 'tanaka'
-          expect(@user).not_to be_valid  
+          expect(@user).not_to be_valid
         end
       end
     end
     describe 'phone_number' do
       context '正常系' do
-        it "ハイフンなしの10桁であれば登録できる" do
+        it 'ハイフンなしの10桁であれば登録できる' do
           @user.phone_number = '0901234567'
           expect(@user).to be_valid
         end
-        it "ハイフンなしの11桁であれば登録できる" do
+        it 'ハイフンなしの11桁であれば登録できる' do
           @user.phone_number = '09012345678'
           expect(@user).to be_valid
         end
       end
       context '異常系' do
-        it "空では登録できない" do
+        it '空では登録できない' do
           @user.phone_number = ''
           expect(@user).not_to be_valid
         end
-        it "数字以外を含むと登録できない" do
+        it '数字以外を含むと登録できない' do
           @user.phone_number = '090-1234-5678'
           expect(@user).not_to be_valid
         end
-        it "9桁以下では登録できない" do
+        it '9桁以下では登録できない' do
           @user.phone_number = '090123456'
           expect(@user).not_to be_valid
         end
-        it "12桁以上では登録できない" do
+        it '12桁以上では登録できない' do
           @user.phone_number = '090123456789'
           expect(@user).not_to be_valid
         end
